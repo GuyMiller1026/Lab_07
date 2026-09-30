@@ -18,6 +18,42 @@ fn main() {
     for i in 0..highs.len() {
         println!("{}: {}", DAYS[i], highs[i]);
     }
+    let avg = average_temp(&highs);
+    println!("Average: {}", avg);
 
+    let hot = hottest_day(&highs);
+    println!("Hottest day: {}", DAYS[hot]);
+
+    let above = count_above(&highs, 75);
+    println!("Days above 75: {}", above);
 }
 
+    fn average_temp(log: &Vec<i32>) -> f64 {
+    if log.len() == 0 {
+        return 0.0;
+    }
+    let mut total = 0;
+    for i in 0..log.len() {
+        total = total + log[i];
+    }
+    total as f64 / log.len() as f64
+}
+fn hottest_day(log: &Vec<i32>) -> usize {
+    let mut hottest = 0;
+    for i in 0..log.len() {
+        if log[i] > log[hottest] {
+            hottest = i;
+        }
+    }
+    hottest
+}
+
+fn count_above(log: &Vec<i32>, threshold: i32) -> usize {
+    let mut count = 0;
+    for i in 0..log.len() {
+        if log[i] > threshold {
+            count = count + 1;
+        }
+    }
+    count
+}
