@@ -31,14 +31,10 @@ fn main() {
     for i in 0..log.len() {
         println!("{}: {}", log[i].day, log[i].high);
     }
-    let avg = average_temp(&log);
-    println!("Average: {}", avg);
-
-    let hot = hottest_day(&log);
-    println!("Hottest day: {}", log[hot].day);
-
-    let above = count_above(&log, 75);
-    println!("Days above 75: {}", above);
+    let summary = summarize(&log, 75);
+    println!("Average: {}", summary.average);
+    println!("Hottest day: {}", summary.hottest_day);
+    println!("Days above 75: {}", summary.days_above);
 }
 fn average_temp(log: &Vec<Reading>) -> f64 {
     if log.len() == 0 {
@@ -68,4 +64,11 @@ fn count_above(log: &Vec<Reading>, threshold: i32) -> usize {
         }
     }
     count
+}
+fn summarize(log: &Vec<Reading>, threshold: i32) -> Summary {
+    Summary {
+        average: average_temp(log),
+        hottest_day: log[hottest_day(log)].day.clone(),
+        days_above: count_above(log, threshold),
+    }
 }
