@@ -1,6 +1,15 @@
 use rand::Rng;
 const DAYS: [&str; 7] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+struct Reading {
+    day: String,
+    high: i32,
+}
 
+struct Summary {
+    average: f64,
+    hottest_day: String,
+    days_above: usize,
+}
 fn main() {
     let mut highs: Vec<i32> = vec![72, 68, 75, 81, 79];
 	for i in 0..highs.len() {
@@ -12,7 +21,13 @@ fn main() {
     let day7: i32 = rng.random_range(60..=100);
     highs.push(day6);
     highs.push(day7);
-
+    let mut log: Vec<Reading> = Vec::new();
+    for i in 0..highs.len() {
+        log.push(Reading {
+            day: DAYS[i].to_string(),
+            high: highs[i],
+        });
+    }
 
     println!("Full week:");
     for i in 0..highs.len() {
