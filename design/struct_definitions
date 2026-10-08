@@ -1,0 +1,8 @@
+Reading
+day:  String - the weekday label, like Mon
+high: i32 - the high temperature for that day
+
+Summary
+average: f64 - average high temperature for the log
+hottest_day: String - label of the day with the highest temperature
+days_above: usize  - number of days with a high above the threshold
