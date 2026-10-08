@@ -39,7 +39,7 @@ fn main() {
     let hot = hottest_day(&log);
     println!("Hottest day: {}", DAYS[hot]);
 
-    let above = count_above(&highs, 75);
+    let above = count_above(&log, 75);
     println!("Days above 75: {}", above);
 }
 
@@ -63,10 +63,10 @@ fn hottest_day(log: &Vec<Reading>) -> usize {
     hottest
 }
 
-fn count_above(log: &Vec<i32>, threshold: i32) -> usize {
+fn count_above(log: &Vec<Reading>, threshold: i32) -> usize {
     let mut count = 0;
     for i in 0..log.len() {
-        if log[i] > threshold {
+        if log[i].high > threshold {
             count = count + 1;
         }
     }
