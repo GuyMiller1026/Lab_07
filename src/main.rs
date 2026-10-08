@@ -11,39 +11,36 @@ struct Summary {
     days_above: usize,
 }
 fn main() {
-    let mut highs: Vec<i32> = vec![72, 68, 75, 81, 79];
-	for i in 0..highs.len() {
-        	println!("{}: {}", DAYS[i], highs[i]);
+    let mut log: Vec<Reading> = Vec::new();
+    log.push(Reading { day: DAYS[0].to_string(), high: 72 });
+    log.push(Reading { day: DAYS[1].to_string(), high: 68 });
+    log.push(Reading { day: DAYS[2].to_string(), high: 75 });
+    log.push(Reading { day: DAYS[3].to_string(), high: 81 });
+    log.push(Reading { day: DAYS[4].to_string(), high: 79 });
+    for i in 0..log.len() {
+        println!("{}: {}", log[i].day, log[i].high);
     }
 
     let mut rng = rand::rng();
     let day6: i32 = rng.random_range(60..=100);
     let day7: i32 = rng.random_range(60..=100);
-    highs.push(day6);
-    highs.push(day7);
-    let mut log: Vec<Reading> = Vec::new();
-    for i in 0..highs.len() {
-        log.push(Reading {
-            day: DAYS[i].to_string(),
-            high: highs[i],
-        });
-    }
+    log.push(Reading { day: DAYS[5].to_string(), high: day6 });
+    log.push(Reading { day: DAYS[6].to_string(), high: day7 });
 
     println!("Full week:");
-    for i in 0..highs.len() {
-        println!("{}: {}", DAYS[i], highs[i]);
+    for i in 0..log.len() {
+        println!("{}: {}", log[i].day, log[i].high);
     }
     let avg = average_temp(&log);
     println!("Average: {}", avg);
 
     let hot = hottest_day(&log);
-    println!("Hottest day: {}", DAYS[hot]);
+    println!("Hottest day: {}", log[hot].day);
 
     let above = count_above(&log, 75);
     println!("Days above 75: {}", above);
 }
-
-    fn average_temp(log: &Vec<Reading>) -> f64 {
+fn average_temp(log: &Vec<Reading>) -> f64 {
     if log.len() == 0 {
         return 0.0;
     }
@@ -53,6 +50,7 @@ fn main() {
     }
     total as f64 / log.len() as f64
 }
+
 fn hottest_day(log: &Vec<Reading>) -> usize {
     let mut hottest = 0;
     for i in 0..log.len() {
@@ -62,7 +60,6 @@ fn hottest_day(log: &Vec<Reading>) -> usize {
     }
     hottest
 }
-
 fn count_above(log: &Vec<Reading>, threshold: i32) -> usize {
     let mut count = 0;
     for i in 0..log.len() {
