@@ -33,7 +33,7 @@ fn main() {
     for i in 0..highs.len() {
         println!("{}: {}", DAYS[i], highs[i]);
     }
-    let avg = average_temp(&highs);
+    let avg = average_temp(&log);
     println!("Average: {}", avg);
 
     let hot = hottest_day(&highs);
@@ -43,13 +43,13 @@ fn main() {
     println!("Days above 75: {}", above);
 }
 
-    fn average_temp(log: &Vec<i32>) -> f64 {
+    fn average_temp(log: &Vec<Reading>) -> f64 {
     if log.len() == 0 {
         return 0.0;
     }
     let mut total = 0;
     for i in 0..log.len() {
-        total = total + log[i];
+        total = total + log[i].high;
     }
     total as f64 / log.len() as f64
 }
