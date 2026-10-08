@@ -1,0 +1,11 @@
+Item                                                                                        Decision
+Days                                                                                        Leave it as is
+Its a fixed constant and wouldn't change
+Highs                                                                                       convert to struct/collection
+The temperatures can move into this field in each reading so we dont need a seperate vec
+Days[i] paired with highs                                                                   convert to struct/collection
+The label and temperature should be together which a reading struct would do
+Value returned by hottest_day                                                               Leave as is
+Its index is only used once
+The threshold 75                                                                            Leave as is
+Its one i32 value and its passed as a paramater so I dont think it needs a struct
